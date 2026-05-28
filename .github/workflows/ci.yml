@@ -4,15 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v1
+      - name: Checkout code
+      - uses: actions/checkout@v3
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
-      - name: Build        
-        run: dotnet build --no-restore
+      - name: Build Application  
+        run: dotnet build --configuration Release --no-restore
       - name: Run tests
-        run: |
-          dotnet test
+        run: dotnet test --no-restore --verbosity normal
